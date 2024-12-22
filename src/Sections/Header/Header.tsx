@@ -4,6 +4,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import Link from 'next/link';
 import SecondComponent from "@/Sections/SecondComponent/SecondComponent";
+import Image from 'next/image';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
