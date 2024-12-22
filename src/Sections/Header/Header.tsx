@@ -4,7 +4,9 @@ import { IoIosArrowBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import Link from 'next/link';
 import SecondComponent from "@/Sections/SecondComponent/SecondComponent";
-import Image from 'next/image';
+import LogoComponent from "@/Sections/LogoComponent/LogoComponent";
+import InfoComponent from "@/Sections/InfoComponent/InfoComponent";
+import { services } from "@/source";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +14,29 @@ const Header = () => {
   const handleToggleModal = () => {
     setIsModalOpen((prevState) => !prevState);
   };
+  
+
+  const [isLogoModalOpen, setIsLogoModalOpen] = useState(false); 
+
+  const handleLogoClick = () => {
+    console.log("Клик на логотип");
+    setIsLogoModalOpen((prevState) => !prevState); 
+  };
+  
+  const [startIndex, setStartIndex] = useState(0);
+  const itemsPerPage = 4; 
+
+  const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+    console.log("Событие сработало:", e.deltaY);
+    console.log("Скролл", e.deltaY);
+    console.log("Текущий индекс:", startIndex);
+    if (e.deltaY > 0 && startIndex + itemsPerPage < services.length) {
+      setStartIndex((prev) => Math.min(prev + 1, services.length - itemsPerPage));
+    } else if (e.deltaY < 0 && startIndex > 0) {
+      setStartIndex((prev) => Math.max(prev - 1, 0));
+    }
+  }; 
+  
   
 
   return (
@@ -26,108 +51,58 @@ const Header = () => {
           <div className="header-top">
             <button className="top-btn1">
                 <img src="/Поделиться.png" alt="Поделиться" />
-            </button>
-            <button className="top-btn2">
+            </button>  
+
+
+            <div className="top-btn2" onClick={handleLogoClick}>
                 <img src="/лого.png" alt="Лого" />
-            </button>
+            </div>
+            
+            {isLogoModalOpen && (
+            <div className="modal-logo" onClick={handleLogoClick}>
+                <div
+                className="modal-logo__content"
+                onClick={(e) => e.stopPropagation()}
+                >
+                <LogoComponent />
+                </div>
+            </div>
+            )}              
+
             <button className="top-btn3">
-                <img src="/Информация.png" alt="Информация" />
+                <Link href="/Info">
+                    <img src="/Информация.png" alt="Информация" />
+                </Link>
             </button>
           </div>
-
 
           {/* Центральные кнопки */}
-          <div className="header-main">
-            <div className="button-with-dot1">
-              <GoDotFill className="side-btn__dot1" />
-              <button className="side-btn1">
-                <div className="side-btn__header">
-                  <div className="side-btn__title-wrapper">
-                    <span className="side-btn__title">Фишка страдательная</span> 
-                    <BiDownArrow className="side-btn__icon" />
-                  </div>
-                  <span className="side-btn__price">100 ₽</span>
+          <div className="header-scroll" onWheel={(e) => handleScroll(e)}>
+            {[...Array(itemsPerPage)].map((_, index) => {
+                const service = services[startIndex + index];
+                return (
+                <div key={index} className={`button-with-dot${index + 1}`}>
+                    <GoDotFill className={`side-btn__dot${index + 1}`} />
+                    <button className={`side-btn${index + 1}`}>
+                    <div className="side-btn__header">
+                        <div className="side-btn__title-wrapper">
+                        <span className="side-btn__title">{service?.title || "—"}</span>
+                        <BiDownArrow className="side-btn__icon" />
+                        </div>
+                        <span className="side-btn__price">{service?.price || "—"}</span>
+                    </div>
+                    <p className="side-btn__description">{service?.description || "—"}</p>
+                    </button>
                 </div>
-                <p className="side-btn__description">Помогает страдать. Фильтры делают страдание эстетичным.</p>
-              </button>
+                );
+            })}
             </div>
-
-            <div className="button-with-dot2">
-              <GoDotFill className="side-btn__dot2" />
-              <button className="side-btn2">
-                <div className="side-btn__header">
-                  <div className="side-btn__title-wrapper">
-                    <span className="side-btn__title">Фишка независимая</span>
-                    <BiDownArrow className="side-btn__icon" />
-                  </div>
-                  <span className="side-btn__price">100 ₽</span>
-                </div>
-                <p className="side-btn__description">Помогает отделяться на орбиты, помещаться.</p>
-              </button>
-            </div>
-
-            <div className="button-with-dot3">
-              <GoDotFill className="side-btn__dot3" />
-              <button className="side-btn3">
-                <div className="side-btn__header">
-                  <div className="side-btn__title-wrapper">
-                    <span className="side-btn__title">Фишка от одиночества</span>
-                    <BiDownArrow className="side-btn__icon" />
-                  </div>
-                  <span className="side-btn__price">100 ₽</span>
-                </div>
-                <p className="side-btn__description">Мотивирующее на действия. Помогает задуматься.</p>
-              </button>
-            </div>
-
-            <div className="button-with-dot4">
-              <GoDotFill className="side-btn__dot4" />
-              <button className="side-btn4">
-                <div className="side-btn__header">
-                  <div className="side-btn__title-wrapper">
-                    <span className="side-btn__title">Фишка с рюкзаками</span>
-                    <BiDownArrow className="side-btn__icon" />
-                  </div>
-                  <span className="side-btn__price">100 ₽</span>
-                </div>
-                <p className="side-btn__description">Констатация независимого положения. Позволяет отказаться.</p>
-              </button>
-            </div>
-
-            <div className="button-with-dot5">
-              <GoDotFill className="side-btn__dot5" />
-              <button className="side-btn5">
-                <div className="side-btn__header">
-                  <div className="side-btn__title-wrapper">
-                    <span className="side-btn__title">Фишка с монстрами</span>
-                    <BiDownArrow className="side-btn__icon" />
-                  </div>
-                  <span className="side-btn__price">100 ₽</span>
-                </div>
-                <p className="side-btn__description">Помогает справляться со своими монстрами.</p>
-              </button>
-            </div>
-
-            <div className="button-with-dot6">
-              <GoDotFill className="side-btn__dot6" />
-              <button className="side-btn6">
-                <div className="side-btn__header">
-                  <div className="side-btn__title-wrapper">
-                    <span className="side-btn__title">Фишка мотивирующая</span>
-                    <BiDownArrow className="side-btn__icon" />
-                  </div>
-                  <span className="side-btn__price">100 ₽</span>
-                </div>
-                <p className="side-btn__description">Обозначает «так себе ситуацию». Служит как точка опоры для развития.</p>
-              </button>
-            </div>
-          </div>
-
 
            {/* Кнопка сбоку справа */}
            <div className="button-right" onClick={handleToggleModal}>
               <IoIosArrowBack className="button-right__icon" />
             </div>
+
             {/* Модальное окно с SecondComponent */}
             {isModalOpen && (
               <div className="modal" onClick={handleToggleModal}>
@@ -139,7 +114,6 @@ const Header = () => {
                 </div>
               </div>
             )}
-
 
           {/* Кнопка снизу */}
           <div className="header-bottom">

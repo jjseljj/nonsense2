@@ -1,11 +1,28 @@
 .header {
     position: relative;
-    width: 1177px;
-    height: 1569px;
+    width: 100%;
+    height: 100vh;
+    /*width: 1177px;
+    height: 1569px;*/
     overflow: hidden;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,   /* Полностью прозрачный участок */
+        transparent 40%,  /* Прозрачность заканчивается на 75% ширины */
+        rgba(16, 137, 201, 0.5) 50%, /* Градиент начинается с 80% ширины */
+        #1494D9 60%,      /* Основной цвет градиента */
+        #022231 100%      /* Фон в конце */
+    );
+}  
+  .header__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(13, 127, 187, 0.02) 0%, rgba(16, 137, 201, 0.474806) 20%, #1494D9 60%, #022231 100%);
+    z-index: 1;
   }
-  
-  
   .header__content {
     position: absolute;
     top: 0;
@@ -17,16 +34,18 @@
   
   .header__border {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1120px;
-      height: 1474px;
+      top: 3%;
+      left: 2%;
+      width: 100% !important;
+      height: 100% !important;
+      /*width: 1120px;
+      height: 1474px;*/
       border: 2px solid;
       border-image-source: linear-gradient(208.21deg, #FCFC26 0.43%, #ED77A9 99.49%);
-      border-image-slice: 1;
-      transform: translate(-50%, -50%);
+      border-image-slice: 1;    
       pointer-events: none; 
       z-index: 1;
+      border-radius: 20px !important;
     }
     /*.header__border {
       position: absolute;
@@ -47,10 +66,13 @@
   
   .header__image-wrapper {
       position: relative;
-      width: 1177px;
-      height: 1569px;
-      background: url('/public/1.png') no-repeat center center;
+      width: 95% !important;
+      height: 95% !important; 
+      /*width: 1177px;
+      height: 1569px;*/
+      /*background: url('/public/1.png') no-repeat center center;*/
       background-size: cover;
+      pointer-events: none;
   }
   .header__background {
       width: 1177px;
@@ -76,7 +98,9 @@
       justify-content: center;
       background: none;
       border: none;
-      transform: translateX(0%) translateY(-50%);
+      transform: translateX(0%) translateY(0%);
+      z-index: 2;
+      pointer-events: auto;
     }
     
     .top-btn2 {
@@ -87,13 +111,20 @@
       justify-content: center;
       background: none;
       border: none;
-      transform: translateX(0%) translateY(-50%);
+      transform: translateX(0%) translateY(0%);
       position: relative;
-      z-index: 2; 
+      z-index: 10000; 
       background-color: transparent;
       border: none;
+      pointer-events: auto;
     }
-    
+    .top-btn2 img {
+        display: block;
+        width: 100%;
+        height: auto;
+        cursor: pointer;
+      }
+      
     .top-btn3 {
       width: 75px;
       height: 75px;
@@ -102,7 +133,9 @@
       justify-content: center;
       background: none;
       border: none;
-      transform: translateX(0%) translateY(-50%);
+      transform: translateX(0%) translateY(0%);
+      z-index: 2;
+      pointer-events: auto;
     }
       
    
@@ -127,29 +160,22 @@
       padding: 40px;
     }
     .side-btn1 {
-      transform: translateX(20%) translateY(50%);
+      transform: translateX(20%) translateY(-10%);
     }
     
     .side-btn2 {
-      transform: translateX(30%) translateY(80%);
+      transform: translateX(30%) translateY(0%);
     }
     
     .side-btn3 {
-      transform: translateX(50%) translateY(110%);
+      transform: translateX(50%) translateY(10%);
     }
     
     .side-btn4 {
-      transform: translateX(20%) translateY(250%);
+      transform: translateX(70%) translateY(20%);
     }
     
-    .side-btn5 {
-      transform: translateX(30%) translateY(280%);
-    }
-    
-    .side-btn6 {
-      transform: translateX(50%) translateY(310%);
-    }
-    
+  
     
     .side-btn__title {
       font-family: 'Project Space', sans-serif;
@@ -226,8 +252,8 @@
       height: 96px;
       background-color: #340233;
       position: absolute;
-      top: 718px;
-      left: 1082px;
+      top: 418px;
+      left: 1725px;
       border-top-left-radius: 20%;
       border-bottom-left-radius: 20%;
       border-top-right-radius: 0;
@@ -262,39 +288,29 @@
   
     .side-btn__dot1 {
       position: absolute;
-      transform: translateX(400%) translateY(220%);
+      transform: translateX(400%) translateY(-30%);
       z-index: 10; 
     }
     
     .side-btn__dot2 {
       position: absolute;
-      transform: translateX(650%) translateY(400%);
+      transform: translateX(650%) translateY(-30%);
       z-index: 10; 
     }
     
     .side-btn__dot3 {
       position: absolute;
-      transform: translateX(1100%) translateY(520%);
+      transform: translateX(1100%) translateY(20%);
       z-index: 10; 
     }
     
     .side-btn__dot4 {
       position: absolute;
-      transform: translateX(400%) translateY(1200%);
+      transform: translateX(1550%) translateY(70%);
       z-index: 10; 
     }
     
-    .side-btn__dot5 {
-      position: absolute;
-      transform: translateX(650%) translateY(1350%);
-      z-index: 10; 
-    }
-    
-    .side-btn__dot6 {
-      position: absolute;
-      transform: translateX(1100%) translateY(1500%);
-      z-index: 10; 
-    }
+   
      
     .button-with-dot1,
   .button-with-dot2,
@@ -318,8 +334,7 @@
     right: 0;
     width: 50%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.1);   
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     border: 4px solid transparent;
     border-image-source: linear-gradient(208.21deg, #fcfc26 0.43%, #ed77a9 99.49%);
@@ -362,4 +377,42 @@
   .header.modal-open::before {
     display: block;
   }
+  
+
+
+  /* Стиль для модального окна логотипа */
+.modal-logo {
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 1050;
+    width: 300px;
+    padding: 20px;
+  }
+  
+  .modal-logo__content {
+    text-align: center;
+  }
+
+
+  
+  .header-scroll {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+  }
+  
+  
   
